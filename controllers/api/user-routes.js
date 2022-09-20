@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-// get all users
+// HTTP GET request ALL users
 router.get('/', (req, res) => {
   User.findAll({
     attributes: { exclude: ['password'] }
@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// HTTP GET request SINGLE user
 router.get('/:id', (req, res) => {
   User.findOne({
     attributes: { exclude: ['password'] },
@@ -33,6 +34,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// HTTP POST request SINGLE user
 router.post('/', (req, res) => {
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
   User.create({
@@ -47,6 +49,7 @@ router.post('/', (req, res) => {
     });
 });
 
+// HTTP POST request SINGLE verify user
 router.post('/login', (req, res) => {
   User.findOne({
     where: {
@@ -71,6 +74,8 @@ router.post('/login', (req, res) => {
   });
 });
 
+
+// HTTP PUT request SINGLE user
 router.put('/:id', (req, res) => {
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 
@@ -93,6 +98,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// HTTP DELETE request SINGLE user
 router.delete('/:id', (req, res) => {
   User.destroy({
     where: {
