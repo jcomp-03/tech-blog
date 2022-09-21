@@ -1,0 +1,15 @@
+<ol class="post-list">
+  {{#each blogPosts as | blogPost |}}
+  <li>
+    <article class="post">
+      <div class="title">
+        <a href="" target="_blank">{{blogPost.title}}</a>
+        <span>Posted by {{blogPost.User.username}}</span>
+      </div>
+      <div class="meta">
+        {{blogPost.content}}
+      </div>
+    </article>
+  </li>
+  {{/each}}
+</ol>
