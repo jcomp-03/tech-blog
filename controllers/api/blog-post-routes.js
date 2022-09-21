@@ -1,15 +1,31 @@
 const router = require('express').Router();
-const { Blog_Post, User } = require('../../models');
+const { User, Blog_Post, Comment } = require('../../models');
 
 // HTTP GET request ALL blog posts JOIN user information
 router.get('/', (req, res) => {
+  // notice that when we return all the blog posts, we return
+  // the username who made the blog post, but also the username of
+  // whoever left a comment (that's the purpose of nested include)
   Blog_Post.findAll({
     attributes: ['id', 'title', 'content', 'created_at'],
     order: [['created_at', 'DESC']],
     include: [
+      // First LEFT OUTER JOIN blog post with user
       {
         model: User,
         attributes: ['username']
+      },
+      // Second LEFT OUTER JOIN blog post with comment
+      {  
+        model: Comment,
+        attributes: ['id', 'comment_text', 'created_At'],
+        include: [
+          // Third LEFT OUTER JOIN comment with user
+          {
+            model: User,
+            attributes: ['username']
+          }
+        ]
       }
     ]
   })
@@ -31,6 +47,16 @@ router.get('/:id', (req, res) => {
       {
         model: User,
         attributes: ['username']
+      },
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'created_At'],
+        include: [
+          {
+            model: User,
+            attributes: ['username']
+          }
+        ]
       }
     ]
   })
