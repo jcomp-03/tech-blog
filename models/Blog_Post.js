@@ -46,11 +46,11 @@ Blog_Post.init(
       autoIncrement: true
     },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
       allowNull: false
     },
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1000),
       allowNull: false,
     },
     user_id: {
