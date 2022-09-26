@@ -37,7 +37,10 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [4]
+        len: {
+          args: 8,
+          msg: "Your password for sign-up or login must be at minimum 8 characters long."
+        }
       }
     }
   },
@@ -48,7 +51,6 @@ User.init(
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
-
       async beforeUpdate(updatedUserData) {
         updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
         return updatedUserData;

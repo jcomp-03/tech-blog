@@ -68,7 +68,7 @@ router.post("/", (req, res) => {
     });
 });
 
-// HTTP POST request SINGLE verify user
+// HTTP POST request VERIFY user
 router.post("/login", (req, res) => {
   User.findOne({
     where: {

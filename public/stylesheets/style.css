@@ -7,6 +7,7 @@
   --bodybg6: #ffcb9a;
   --bodybg7: #2c3531;
   --bodybg8: #116466;
+  --bodybg9: #afd275;
   --h1: #f13c20;
   --h2: #4056a1;
 }
@@ -48,7 +49,7 @@ header h1 a:hover {
 }
 
 header {
-  border-bottom: 0.2em solid #afd275;
+  border-bottom: 0.2em solid var(--bodybg9);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -126,6 +127,86 @@ button:hover {
   color: #7d7d7d;
 }
 
+/* LOGIN.HANDLEBARS VIEW */
+.login-view-container {
+  display: flex;
+  flex-direction: column;
+  /* border: solid 1px pink; */
+}
+
+.view-title {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.forms-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.forms-container > div {
+  margin-bottom: 3em;
+}
+
+.form-title {
+  text-align: center;
+  color: var(--bodybg9);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: solid 1px white; */
+  margin-bottom: 1em;
+}
+
+.labels-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.labels-container label {
+  margin: 0.8em 0 0.1em;
+  color: var(--bodybg4);
+  font-weight: bold;
+}
+
+.labels-container input {
+  padding: 0.8em;
+}
+
+.labels-container button {
+  width: 40%;
+  height: 3em;
+  margin-top: 0.5em;
+  font-size: 1em;
+  background-color:gold;
+  color: #000;
+}
+
+@media screen and (min-width: 768px) {
+  .forms-container {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .forms-container > div {
+    width: 50%;
+  }
+
+}
+
+
+
+
+
+
+
+
+
 textarea,
 input {
   padding: 0.5%;
@@ -144,13 +225,6 @@ textarea {
   min-height: 100px;
 }
 
-form > div {
-  margin-bottom: 2%;
-}
-
-form label {
-  display: block;
-}
 
 .btn-no-style {
   background: none;
