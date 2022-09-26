@@ -35,10 +35,10 @@ router.get("/:id", (req, res) => {
           {
             model: Blog_Post,
             attributes: ["title"],
-          }
-        ]
-      }
-    ]
+          },
+        ],
+      },
+    ],
   })
     .then((dbUserData) => {
       if (!dbUserData) {
@@ -53,7 +53,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// HTTP POST request SINGLE user
+// HTTP POST request create SINGLE user
 router.post("/", (req, res) => {
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
   User.create({
@@ -61,7 +61,19 @@ router.post("/", (req, res) => {
     email: req.body.email,
     password: req.body.password,
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((dbUserData) => {
+      // Save to the current session the user's id, username, and a Boolean
+      // describing whether or not the user is logged in
+      // We ensure the session is created, and then the callback function will
+      // run
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+
+        res.json(dbUserData);
+      });
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -89,8 +101,29 @@ router.post("/login", (req, res) => {
       return;
     }
 
-    res.json({ user: dbUserData, message: "You are now logged in!" });
+    req.session.save(() => {
+      // declare session variables
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+
+      res.json({ user: dbUserData, message: "You are now logged in!" });
+    });
   });
+});
+
+// HTTP POST request logout user
+router.post('/logout', (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  }
+  else {
+    console.log(`******************************************
+You tried logging out but are not currently logged in.`)
+    res.status(404).end();
+  }
 });
 
 // HTTP PUT request SINGLE user
