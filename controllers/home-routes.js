@@ -32,7 +32,7 @@ router.get("/", (req, res) => {
       const blogPosts = dbBlogPostData.map((blog) => blog.get({ plain: true }));
       // evn though blogPosts is an array, pass it in as an object
       // property to retain the ability to add/modify object properties
-      res.render("homepage", { blogPosts });
+      res.render("homepage", { blogPosts, loggedIn: req.session.loggedIn });
     })
     .catch((err) => {
       console.log(err);

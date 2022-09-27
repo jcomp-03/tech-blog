@@ -29,8 +29,11 @@
           <i class="fa-solid fa-binoculars"></i>
         </h1>
         <nav>
-          <button id="logout" class="btn-no-style">logout</button>
-          <a href="/login">login</a>
+          {{#if loggedIn}}
+            <button id="logout" class="btn-no-style">logout</button>
+          {{else}}
+            <a href="/login">login</a>
+          {{/if}}
         </nav>
         <span>Opinions on software and tech, worth reading</span>
       </header>
@@ -41,7 +44,11 @@
         Thanks for visiting!
       </footer>
     </div>
-    <script src="/javascript/logout.js"></script>
+
+    <!-- if the user is logged in, load the javascript file -->
+    {{#if loggedIn}}
+      <script src="/javascript/logout.js"></script>
+    {{/if}}
   </body>
 
 </html>
