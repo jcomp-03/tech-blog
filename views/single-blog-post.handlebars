@@ -1,0 +1,49 @@
+<article class="sb-blog">
+  <div class="sb-header">
+    <div class="sb-title">{{blogPost.title}}</div>
+    <span>Referred article
+      <i class="fa-solid fa-caret-right right-caret"></i>
+      <a
+        href="{{blogPost.referred_article}}"
+        target="_blank"
+      >{{blogPost.referred_article}}</a></span>
+  </div>
+  <div>
+    {{blogPost.content}}
+  </div>
+  <div class="meta">
+    {{blogPost.User.username}} on {{blogPost.created_at}}
+    {{blogPost.Comments.length}} comment(s)
+  </div>
+</article>
+
+<!-- if user is logged in, then render the form -->
+{{#if loggedIn}}
+<form class="sb-comment-form">
+  <div>
+    <textarea name="comment-body"></textarea>
+  </div>
+  <div>
+    <button type="submit">Add my comment</button>
+    <button type="button" class="upvote-btn">Upvote</button>
+  </div>
+</form>
+{{/if}}
+
+<div class="sb-comments">
+  {{#each blogPost.Comments as |comment|}}
+  <section class="sb-comment">
+    <div class="meta">
+      {{comment.User.username}} on {{comment.created_at}}
+    </div>
+    <div class="text">
+      {{comment.comment_text}}
+    </div>
+  </section>
+  {{/each}}
+</div>
+
+<!-- if user is logged in, then load the javascript file -->
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{/if}}

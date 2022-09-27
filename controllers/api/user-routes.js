@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 // HTTP GET request SINGLE user
 router.get("/:id", (req, res) => {
   User.findOne({
-    attributes: { exclude: ["password"] },
+    attributes: ["id", "username", "email", "password" ], //{ exclude: ["password"] },
     where: {
       id: req.params.id,
     },
@@ -92,15 +92,12 @@ router.post("/login", (req, res) => {
       res.status(400).json({ message: "No user with that email address!" });
       return;
     }
-
     // checkPassword is an instance method defined in the User model
     const validPassword = dbUserData.checkPassword(req.body.password);
-
     if (!validPassword) {
       res.status(400).json({ message: "Incorrect password!" });
       return;
     }
-
     req.session.save(() => {
       // declare session variables
       req.session.user_id = dbUserData.id;
@@ -109,6 +106,9 @@ router.post("/login", (req, res) => {
 
       res.json({ user: dbUserData, message: "You are now logged in!" });
     });
+  })
+  .catch(err => {
+    console.log('***************', err);
   });
 });
 
@@ -117,10 +117,12 @@ router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
+      console.log(`***************************************************
+You have been successfully logged out. Goodbye.`)
     });
   }
   else {
-    console.log(`******************************************
+    console.log(`***************************************************
 You tried logging out but are not currently logged in.`)
     res.status(404).end();
   }
@@ -128,9 +130,8 @@ You tried logging out but are not currently logged in.`)
 
 // HTTP PUT request SINGLE user
 router.put("/:id", (req, res) => {
+  // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
-
-  // pass in req.body instead to only update what's passed through
   User.update(req.body, {
     where: {
       id: req.params.id,

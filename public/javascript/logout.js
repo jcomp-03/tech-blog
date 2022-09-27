@@ -7,7 +7,7 @@ async function logout() {
     if (response.ok) {
       document.location.replace('/');
     } else {
-      alert(response.statusText);
+      alert("You are not currently logged in.");
     }
   }
   

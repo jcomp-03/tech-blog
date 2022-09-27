@@ -59,6 +59,12 @@ Blog_Post.init(
         model: 'User',
         key: 'id'
       }
+    },
+    referred_article: {
+      type: DataTypes.STRING(1000),
+      validate: {
+        isUrl: true
+      }
     }
   },
   {
