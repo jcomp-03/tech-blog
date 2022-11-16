@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connection_postgres');
+// const sequelize = require('../config/connection_mysql');
+
 // create our Blog Post model
 class Blog_Post extends Model {
   static upvote(body, models) {
@@ -71,7 +73,7 @@ Blog_Post.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Blog_Post'
+    modelName: 'blog_posts'
   }
 );
 

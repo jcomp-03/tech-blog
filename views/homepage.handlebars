@@ -1,17 +1,7 @@
 <ul class="blog-list">
   {{#each blogPosts as |blogPost|}}
     <li>
-      <article class="blog">
-        <div class="blog-header">
-          <a href="/post/{{blogPost.id}}" target="_blank">{{blogPost.title}}</a>
-          <span>Posted by {{blogPost.User.username}}</span>
-        </div>
-        <a href="/post/{{blogPost.id}}" target="_blank">
-          <div class="blog-content">
-            {{blogPost.content}}
-          </div>
-        </a>
-      </article>
+      {{> blog-info blogPost}}
     </li>
   {{/each}}
 </ul>

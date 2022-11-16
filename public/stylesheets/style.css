@@ -1,4 +1,6 @@
 :root {
+  --binoculars: #e75c12;
+  --login: #e75c12;
   --bodybg1: #c5cbe3;
   --bodybg2: #c2cad0;
   --bodybg3: #efe2ba;
@@ -26,12 +28,10 @@ html {
   background-color: var(--bodybg7);
 }
 
-
-
 .wrapper {
   width: 100%;
   min-height: 100%;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ html {
 }
 
 header {
-  border-bottom: 0.2em solid var(--bodybg9);
+  /* border-bottom: 0.2em solid var(--bodybg9); */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,18 +49,18 @@ header {
 }
 
 header h1 {
-  font-size: 3em;
+  font-size: 2em;
   font-family: "Londrina Solid", cursive;
   color: #afd275;
 }
 
 header h1 i {
-  color: black;
+  color: var(--binoculars);
   margin-left: 0.2em;
 }
 
 header h1 a {
-  color: var(--bodybg4);
+  color: var(--bodybg7);
   font-weight: bold;
   transition: color 0.5s;
 }
@@ -68,6 +68,13 @@ header h1 a {
 header h1 a:hover {
   color: var(--bodybg7);
 }
+
+.header-nav a {
+  color: var(--login);
+  text-decoration: none;
+  font-size: 2em;
+}
+
 
 header span {
   font-family: "Noto Sans Display", sans-serif;

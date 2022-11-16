@@ -12,7 +12,7 @@
     {{blogPost.content}}
   </div>
   <div class="meta">
-    {{blogPost.User.username}} on {{blogPost.created_at}}
+    {{blogPost.User.username}} on {{format_date blogPost.created_at}}
     {{blogPost.Comments.length}} comment(s)
   </div>
 </article>
@@ -30,18 +30,8 @@
 </form>
 {{/if}}
 
-<div class="sb-comments">
-  {{#each blogPost.Comments as |comment|}}
-  <section class="sb-comment">
-    <div class="meta">
-      {{comment.User.username}} on {{comment.created_at}}
-    </div>
-    <div class="text">
-      {{comment.comment_text}}
-    </div>
-  </section>
-  {{/each}}
-</div>
+{{> comments blogPost.Comments}}
+
 
 <!-- if user is logged in, then load the javascript file -->
 {{#if loggedIn}}

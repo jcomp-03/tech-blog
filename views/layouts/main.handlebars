@@ -28,15 +28,17 @@
           <a href="/">Takes on Tech in 2</a>
           <i class="fa-solid fa-binoculars"></i>
         </h1>
-        <nav>
+        <nav class="header-nav">
           {{#if loggedIn}}
-            <button id="logout" class="btn-no-style">logout</button>
+          <a href="/user/{{username}}"><i class="fa-solid fa-user"></i></a>
+          <a href="" id="logout"><i class="fa-solid fa-right-from-bracket"></i></i></a>
+            {{!-- <button id="logout" class="btn-no-style">logout</button> --}}
           {{else}}
-            <a href="/login">login</a>
+            <a href="/login"><i class="fa-solid fa-right-to-bracket"></i></a>
           {{/if}}
         </nav>
-        <span>Opinions on software and tech, worth reading</span>
       </header>
+      <span>Opinions on software and tech, worth reading</span>
       <main>
         {{{body}}}
       </main>
