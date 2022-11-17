@@ -38,9 +38,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // turn on routes
-console.log('***** Before controllers *****');
 app.use(controllers);
-console.log('***** After controllers *****');
+
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
