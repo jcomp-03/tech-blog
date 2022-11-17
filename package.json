@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "seeds": "node seeds/index.js",
-    "start": "nodemon -e .css,.js,.handlebars server.js"
+    "start": "nodemon -e .css,.js,.handlebars --trace-warnings server.js"
   },
   "author": "",
   "license": "ISC",
